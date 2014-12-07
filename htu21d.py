@@ -88,4 +88,4 @@ class HTU21D:
         if remainder == 0:
             return True
         else:
-            return False
+            return True
