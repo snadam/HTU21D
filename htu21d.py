@@ -89,3 +89,4 @@ class HTU21D:
             return True
         else:
             return True
+        # set to True just for testing.  Essentially eliminates the CRC check routine.
