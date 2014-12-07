@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from Adafruit_I2C import Adafruit_I2C
+from I2C import I2C
 
 # ===========================================================================
 # HTU21D Class
@@ -23,7 +23,7 @@ class HTU21D:
 
     # Constructor
     def __init__(self):
-        self.i2c = Adafruit_I2C(self.address)
+        self.i2c = I2C(self.address)
 
     def readUserRegister(self):
         # "Read the user register byte"
