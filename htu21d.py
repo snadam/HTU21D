@@ -51,9 +51,11 @@ class HTU21D:
 
     def readHumidityData(self):
         # "Read 3 humidity bytes from the sensor"
+        # three values returned in bytes, data(MSB) / data(LSB) / Checksum
         # value[0], value[1]: Raw relative humidity data
         # value[2]: CRC
-        value = self.i2c.readList(self.TRIGGER_HUMD_MEASURE_HOLD, 3)
+        value = [78, 133, 107]
+        # value = self.i2c.readList(self.TRIGGER_HUMD_MEASURE_HOLD, 3)
         print "value returned from i2c module = ", value
 
         # CRC Check
@@ -90,5 +92,5 @@ class HTU21D:
         if remainder == 0:
             return True
         else:
-            return True
+            return False
         # set to True just for testing.  Essentially eliminates the CRC check routine.
