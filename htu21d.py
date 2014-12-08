@@ -54,7 +54,7 @@ class HTU21D:
         # three values returned in bytes, data(MSB) / data(LSB) / Checksum
         # value[0], value[1]: Raw relative humidity data
         # value[2]: CRC
-        value = [78, 133, 107]
+        value = [104, 58, 124]
         # value = self.i2c.readList(self.TRIGGER_HUMD_MEASURE_HOLD, 3)
         print "value returned from i2c module = ", value
 
