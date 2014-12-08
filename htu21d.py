@@ -54,16 +54,15 @@ class HTU21D:
         # three values returned in bytes, data(MSB) / data(LSB) / Checksum
         # value[0], value[1]: Raw relative humidity data
         # value[2]: CRC
-        value = [104, 58, 124]
-        # value = self.i2c.readList(self.TRIGGER_HUMD_MEASURE_HOLD, 3)
-        print "value returned from i2c module = ", value
+        value = self.i2c.readList(self.TRIGGER_HUMD_MEASURE_HOLD, 3)
+        # uncomment next line to check crc8check using values form mfg's datasheet
+        # value = [78, 133, 107]
 
         # CRC Check
         if not self.crc8check(value):
             return -255
 
         rawRHData = (value[0] << 8) + value[1]
-        print "rawRHData = ", rawRHData
 
         # Clear the status bits
         rawRHData = rawRHData & 0xFFFC;
@@ -77,9 +76,7 @@ class HTU21D:
         # "Calculate the CRC8 for the data received"
         # Ported from Sparkfun Arduino HTU21D Library: https://github.com/sparkfun/HTU21D_Breakout
         remainder = ((value[0] << 8) + value[1]) << 8
-        print "remainder prior to CRC but after addition =", remainder
         remainder |= value[2]
-        print "reminder after the OR= ", remainder
 
         # POLYNOMIAL = 0x0131 = x^8 + x^5 + x^4 + 1
         # divisor = 0x988000 is the 0x0131 polynomial shifted to farthest left of three bytes
@@ -95,4 +92,3 @@ class HTU21D:
             return True
         else:
             return False
-        # set to True just for testing.  Essentially eliminates the CRC check routine.
