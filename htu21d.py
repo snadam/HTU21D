@@ -77,7 +77,9 @@ class HTU21D:
         # "Calculate the CRC8 for the data received"
         # Ported from Sparkfun Arduino HTU21D Library: https://github.com/sparkfun/HTU21D_Breakout
         remainder = ((value[0] << 8) + value[1]) << 8
+        print "remainder prior to CRC but after addition =", remainder
         remainder |= value[2]
+        print "reminder after the OR= ", remainder
 
         # POLYNOMIAL = 0x0131 = x^8 + x^5 + x^4 + 1
         # divisor = 0x988000 is the 0x0131 polynomial shifted to farthest left of three bytes
