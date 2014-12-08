@@ -54,12 +54,14 @@ class HTU21D:
         # value[0], value[1]: Raw relative humidity data
         # value[2]: CRC
         value = self.i2c.readList(self.TRIGGER_HUMD_MEASURE_HOLD, 3)
+        print "value returned from i2c module = ", value
 
         # CRC Check
         if not self.crc8check(value):
             return -255
 
         rawRHData = (value[0] << 8) + value[1]
+        print "rawRHData = ", rawRHData
 
         # Clear the status bits
         rawRHData = rawRHData & 0xFFFC;
